@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import '../components/form_clickable_text.dart';
 import '../components/form_oulined_button.dart';
 import '../components/form_text_field.dart';
 
@@ -54,15 +56,9 @@ class LoginPage extends StatelessWidget {
                             children: [
                               const FormTextField(labelText: "e-mail"),
                               const FormTextField(labelText: "senha"),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 24, bottom: 22),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Row(children: [
-                                    Text("não possui conta? "),
-                                    Text("faça seu cadastro", style: TextStyle(fontWeight: FontWeight.bold))
-                                  ])
-                                ),
+                              const FormClickableText(
+                                label: "não possui conta? ",
+                                clickableLabel: "faça seu cadastro",
                               ),
                               FormOutlinedButton(onTap: login),
                             ],
