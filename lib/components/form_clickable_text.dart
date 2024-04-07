@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../pages/sign_up_page.dart';
-
 class FormClickableText extends StatelessWidget {
   final String label;
   final String clickableLabel;
+  final Route nextPage;
 
   const FormClickableText({
     super.key,
     required this.label,
-    required this.clickableLabel
+    required this.clickableLabel,
+    required this.nextPage
   });
 
   @override
@@ -19,17 +19,17 @@ class FormClickableText extends StatelessWidget {
       child: Align(
           alignment: Alignment.centerLeft,
           child: Row(children: [
-            const Text("não possui conta? "),
+            Text(label),
             GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SignUpPage()),
+                  nextPage,
                 );
               },
-              child: const Text(
-                  "faça seu cadastro",
-                  style: TextStyle(fontWeight: FontWeight.bold)
+              child: Text(
+                  clickableLabel,
+                  style: const TextStyle(fontWeight: FontWeight.bold)
               ),
             ),
           ])

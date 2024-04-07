@@ -1,15 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import '../components/form_clickable_text.dart';
-import '../components/form_oulined_button.dart';
-import '../components/form_text_field.dart';
+import 'package:mentorando/pages/auth/sign_up_page.dart';
+import 'package:mentorando/pages/initial_page.dart';
+import '../../components/form_clickable_text.dart';
+import '../../components/form_oulined_button.dart';
+import '../../components/form_text_field.dart';
+import '../home_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  void login() {
-    print("fazer login");
+  void login(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => HomePage()),
+    );
   }
 
   @override
@@ -55,12 +59,16 @@ class LoginPage extends StatelessWidget {
                           child: Column(
                             children: [
                               const FormTextField(labelText: "e-mail"),
-                              const FormTextField(labelText: "senha"),
-                              const FormClickableText(
+                              const FormTextField(labelText: "senha", isSecret: true),
+                              FormClickableText(
                                 label: "não possui conta? ",
                                 clickableLabel: "faça seu cadastro",
+                                nextPage: MaterialPageRoute(builder: (_) => const SignUpPage()),
                               ),
-                              FormOutlinedButton(onTap: login),
+                              FormOutlinedButton(
+                                  nextPage: MaterialPageRoute(builder: (_) => const InitialPage()),
+                                  buttonText: "fazer login",
+                              ),
                             ],
                           ),
                         ),

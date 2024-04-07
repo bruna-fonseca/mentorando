@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FormOutlinedButton extends StatelessWidget {
-  final VoidCallback onTap;
+  final Route nextPage;
+  final String buttonText;
 
   const FormOutlinedButton({
     super.key,
-    required this.onTap
+    required this.nextPage,
+    required this.buttonText
   });
 
   @override
@@ -13,14 +15,16 @@ class FormOutlinedButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: OutlinedButton(
-        onPressed: onTap,
+        onPressed: () {
+            Navigator.of(context).pushReplacement(nextPage);
+          },
         style: OutlinedButton.styleFrom(
             fixedSize: const Size(250, 60),
             side: const BorderSide(width: 2, color: Color(0xff363B53))
         ),
-        child: const Text(
-          "fazer login",
-          style: TextStyle(
+        child: Text(
+          buttonText,
+          style: const TextStyle(
             color: Color(0xff363B53),
             fontSize: 16,
           ),
