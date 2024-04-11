@@ -32,7 +32,7 @@ class _InitialPageState extends State<InitialPage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.sync), label: "Sprint"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
         ],
       ),
       body: PageView(

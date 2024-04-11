@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mentorando/components/mentor_tile.dart';
 
 import '../components/simple_text_field.dart';
@@ -14,6 +12,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         automaticallyImplyLeading: false,
         title: const Text(
           'Nossos mentores',
@@ -42,6 +41,8 @@ class HomePage extends StatelessWidget {
               // Listagem de mentores
               Expanded(
                 child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     itemBuilder: (_, index) {
                       return MentorTile(mentorInfo: mentor_data.mentorList[index]);

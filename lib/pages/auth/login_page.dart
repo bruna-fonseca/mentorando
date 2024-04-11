@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
   void login(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => HomePage()),
+      MaterialPageRoute(builder: (_) => const HomePage()),
     );
   }
 
