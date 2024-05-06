@@ -38,3 +38,11 @@ List<MentorModel> mentorList = [
   secondMentor,
   fourthMentor,
 ];
+
+List<String> roadMapList = [
+  "code challenge com JS",
+  "currículo e LinkedIn",
+  "Consumo de restFul APIs",
+  "Gerenciamento de Estado em React",
+  "React com TypeScript"
+];

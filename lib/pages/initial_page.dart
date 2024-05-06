@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentorando/pages/home_page.dart';
 import 'package:mentorando/pages/profile_page.dart';
-import 'package:mentorando/pages/sprint_page.dart';
+import 'package:mentorando/pages/sprint/sprint_page.dart';
 
 class InitialPage extends StatefulWidget {
 
@@ -18,7 +18,6 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {

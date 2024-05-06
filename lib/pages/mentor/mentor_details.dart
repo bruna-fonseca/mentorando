@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mentorando/components/custom_button.dart';
 import 'package:mentorando/components/mentor_profile_section.dart';
 import 'package:mentorando/components/profile_bullet_section.dart';

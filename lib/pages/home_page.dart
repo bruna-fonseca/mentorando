@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:mentorando/components/mentor_tile.dart';
-
 import '../components/simple_text_field.dart';
 import '../components/search_button.dart';
 import 'package:mentorando/config/mentor_data.dart' as mentor_data;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List filteredMentors = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      filteredMentors = mentor_data.mentorList;
+    });
+  }
+
+  void _filterMentors(String value) {
+    setState(() {
+      filteredMentors = mentor_data.mentorList
+          .where((mentor) =>
+             mentor.name.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +48,21 @@ class HomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(16.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
                     Expanded(
                       flex: 2,
-                      child: SimpleTextField(labelText: "procure mentores",
+                      child: SimpleTextField(
+                        labelText: "procure mentores",
+                        callback: (String value) {
+                          _filterMentors(value);
+                        },
                       ),
                     ),
-                    SizedBox(width: 8),
-                    SearchButton(),
+                    const SizedBox(width: 8),
+                    const SearchButton(),
                   ],
                 ),
               ),
@@ -45,10 +73,10 @@ class HomePage extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     itemBuilder: (_, index) {
-                      return MentorTile(mentorInfo: mentor_data.mentorList[index]);
+                      return MentorTile(mentorInfo: filteredMentors[index]);
                     },
                     separatorBuilder: (_, index) => const SizedBox(height: 20),
-                    itemCount: mentor_data.mentorList.length,
+                    itemCount: filteredMentors.length,
                 ),
               ),
             ],
