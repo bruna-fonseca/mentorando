@@ -4,28 +4,32 @@ MentorModel firstMentor = MentorModel(
     name: "Fulano de tal",
     occupation: "Technical Lead",
     rating: 5.0,
-    imgProfile: "assets/mentors/man1.svg"
+    imgProfile: "assets/mentors/man1.svg",
+    stacks: ["javascript, nodeJS, expressJS"]
 );
 
 MentorModel fourthMentor = MentorModel(
     name: "Fulana de tal",
     occupation: "Sr. Software Engineer",
     rating: 5.0,
-    imgProfile: "assets/mentors/woman4.svg"
+    imgProfile: "assets/mentors/woman4.svg",
+    stacks: ["ReactJS, Javacript", "NextJS"]
 );
 
 MentorModel secondMentor = MentorModel(
     name: "Fulano de tal",
     occupation: "Technical Lead",
     rating: 3.0,
-    imgProfile: "assets/mentors/man4.svg"
+    imgProfile: "assets/mentors/man4.svg",
+    stacks: ["Swift", "SwiftUI", "UIKIT", "Objective-c"]
 );
 
 MentorModel thirdMentor = MentorModel(
     name: "Fulana de tal",
     occupation: "Sr. Software Engineer",
     rating: 5.0,
-    imgProfile: "assets/mentors/woman2.svg"
+    imgProfile: "assets/mentors/woman2.svg",
+    stacks: ["Java, BootStrap, AngularJS, Javascript"]
 );
 
 List<MentorModel> mentorList = [
@@ -45,4 +49,14 @@ List<String> roadMapList = [
   "Consumo de restFul APIs",
   "Gerenciamento de Estado em React",
   "React com TypeScript"
+];
+
+List<String> stacks = [
+  "Javascript",
+  "C",
+  "Swift",
+  "Dart",
+  "Java",
+  "Kotlin",
+  "Python"
 ];

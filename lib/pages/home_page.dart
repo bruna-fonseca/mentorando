@@ -13,6 +13,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List filteredMentors = [];
+  int? selectedStack;
+
+  selectStack(newStack) {
+    setState(() {
+      selectedStack = newStack;
+      filteredMentors = mentor_data.mentorList
+          .where((mentor) =>
+          mentor.stacks.any((stack) =>
+              stack.toLowerCase().contains(mentor_data.stacks[newStack].toLowerCase()))
+      ).toList();
+    });
+  }
 
   @override
   void initState() {
@@ -62,10 +74,30 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const SearchButton(),
+                    SearchButton(selectStack: selectStack),
                   ],
                 ),
               ),
+              selectedStack != null ? OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    filteredMentors = mentor_data.mentorList;
+                    selectedStack = null;
+                  });
+                },
+                style: OutlinedButton.styleFrom(
+                    fixedSize: const Size(100, 20),
+                    side: const BorderSide(width: 2, color: Color(0xff363B53))
+                ),
+                child: const Text(
+                  "Limpar filtro",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xff363B53),
+                    fontSize: 12,
+                  ),
+                ),
+              ) : const SizedBox.shrink(),
               // Listagem de mentores
               Expanded(
                 child: ListView.separated(
