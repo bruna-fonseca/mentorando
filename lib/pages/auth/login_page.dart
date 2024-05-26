@@ -7,7 +7,9 @@ import '../../components/form_text_field.dart';
 import '../home_page.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({ super.key });
+
+  final _formKey = GlobalKey<FormState>();
 
   void login(BuildContext context) {
     Navigator.push(
@@ -56,20 +58,57 @@ class LoginPage extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              const FormTextField(labelText: "e-mail"),
-                              const FormTextField(labelText: "senha", isSecret: true),
-                              FormClickableText(
-                                label: "não possui conta? ",
-                                clickableLabel: "faça seu cadastro",
-                                nextPage: MaterialPageRoute(builder: (_) => const SignUpPage()),
-                              ),
-                              FormOutlinedButton(
-                                  nextPage: MaterialPageRoute(builder: (_) => const InitialPage()),
-                                  buttonText: "fazer login",
-                              ),
-                            ],
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                FormTextField(
+                                    labelText: "e-mail",
+                                    validator: (email) {
+                                      if (email == null  || email.isEmpty) return "Digite seu email";
+                                      if (!email.isValidEmail()) return "Digite um email valido!";
+                                      return null;
+                                    },
+                                ),
+                                FormTextField(
+                                    labelText: "senha",
+                                    isSecret: true,
+                                  validator: (password) {
+                                      if (password == null || password.isEmpty) return "Digite sua senha";
+                                      if (password.length < 5) return "A senha deve possuir mais de 4 caracteres";
+                                      return null;
+                                  },
+                                ),
+                                FormClickableText(
+                                  label: "não possui conta? ",
+                                  clickableLabel: "faça seu cadastro",
+                                  nextPage: MaterialPageRoute(builder: (_) => SignUpPage()),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(builder: (_) => const InitialPage()
+                                            ));
+                                      }
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                        fixedSize: const Size(250, 60),
+                                        side: const BorderSide(width: 2, color: Color(0xff363B53))
+                                    ),
+                                    child: const Text(
+                                      "fazer login",
+                                      style: TextStyle(
+                                        color: Color(0xff363B53),
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -82,5 +121,13 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
   }
 }

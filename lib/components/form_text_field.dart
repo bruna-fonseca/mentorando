@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class FormTextField extends StatefulWidget {
   final String labelText;
   final bool isSecret;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
 
   const FormTextField({
     super.key,
     this.isSecret = false,
-    required this.labelText
+    this.validator,
+    required this.labelText,
+    this.controller
   });
 
   @override
@@ -27,7 +31,9 @@ class _FormTextFieldState extends State<FormTextField> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: TextField(
+      child: TextFormField(
+        controller: widget.controller,
+        validator: widget.validator,
         obscureText: hidePassword,
         decoration: InputDecoration(
             suffixIcon: widget.isSecret ? IconButton(
