@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mentorando/config/mentor_data.dart' as mentor_data;
 import 'package:mentorando/pages/sprint/components/custom_progress_bar.dart';
 import 'package:mentorando/pages/sprint/components/sprint_card.dart';
 

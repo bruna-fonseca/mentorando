@@ -48,16 +48,16 @@ class MentorDetails extends StatelessWidget {
             Expanded(
               flex: 2,
                 child: ListView(
-                  children: const [
-                   ProfileNormalSection(
+                  children: [
+                   const ProfileNormalSection(
                        sectionTitle: "Sobre Mim",
                        sectionMainContent: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis urna nisi. Sus pendisse porttitor bibendum erat, eu volutpat dui ali quam ne Vivamus nec ipsum porta, aliquet mi vitae, rhoncus magna. Morbi placerat, justo at feugiat dapibus, orci tellus eleifend urna, et interdum est lore",
                    ),
                     ProfileBulletSection(
                       sectionTitle: "Tecnologias",
-                      stacks: ["JavaScript", "ReactJs", "AngularJS", "Redux/Context API"],
+                      stacks: mentorInfo.stacks,
                     ),
-                    ProfileNormalSection(
+                    const ProfileNormalSection(
                       sectionTitle: "Como posso te ajudar",
                       sectionMainContent: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis urna nisi. Sus pendisse porttitor bibendum erat, eu volutpat dui ali quam ne Vivamus nec ipsum porta, aliquet mi vitae, rhoncus magna. Morbi placerat, justo at feugiat dapibus, orci tellus eleifend urna, et interdum est lore",
                     ),

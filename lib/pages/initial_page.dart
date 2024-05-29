@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mentorando/pages/home_page.dart';
+import 'package:mentorando/pages/mentor/home_page.dart';
 import 'package:mentorando/pages/profile_page.dart';
 import 'package:mentorando/pages/sprint/sprint_page.dart';
 

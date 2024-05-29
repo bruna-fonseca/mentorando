@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mentorando/components/star_rating.dart';
+import 'package:mentorando/config/mentors_preferences.dart';
 import 'package:mentorando/models/mentor_model.dart';
 import 'package:mentorando/pages/mentor/mentor_details.dart';
 
@@ -50,7 +51,7 @@ class _MentorTileState extends State<MentorTile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(
+                SvgPicture.network(
                   widget.mentorInfo.imgProfile,
                   width: 50,
                   height: 80,
@@ -96,6 +97,9 @@ class _MentorTileState extends State<MentorTile> {
                     setState(() {
                       isFavorite = !isFavorite;
                     });
+                    if (isFavorite) {
+                      MentorPreferences.saveMentors(widget.mentorInfo);
+                    }
                   },
                   style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(

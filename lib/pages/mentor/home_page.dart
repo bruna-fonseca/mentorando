@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mentorando/components/mentor_tile.dart';
-import '../components/simple_text_field.dart';
-import '../components/search_button.dart';
+import 'package:mentorando/config/endpoints.dart';
+import 'package:mentorando/models/mentor_model.dart';
+import 'package:mentorando/pages/mentor/controller/home_controller.dart';
+import 'package:mentorando/services/http_manager.dart';
+import '../../components/simple_text_field.dart';
+import '../../components/search_button.dart';
 import 'package:mentorando/config/mentor_data.dart' as mentor_data;
 
 class HomePage extends StatefulWidget {
@@ -12,13 +17,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List filteredMentors = [];
+  HttpManager httpManager = HttpManager();
+  List<MentorModel> _filteredMentors = [];
+  List<MentorModel> _originalMentorsList = [];
   int? selectedStack;
+  bool _isLoading = true;
+  bool _hasFetchedData = false;
 
   selectStack(newStack) {
     setState(() {
       selectedStack = newStack;
-      filteredMentors = mentor_data.mentorList
+      _filteredMentors = _originalMentorsList
           .where((mentor) =>
           mentor.stacks.any((stack) =>
               stack.toLowerCase().contains(mentor_data.stacks[newStack].toLowerCase()))
@@ -28,16 +37,36 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    setState(() {
-      filteredMentors = mentor_data.mentorList;
-    });
+      Get.find<HomeController>().printExample();
+      _fetchMentors();
+  }
+
+  Future<void> _fetchMentors() async {
+    if (_hasFetchedData) return;
+
+    try {
+      final response = await httpManager.restRequest(
+          url: Endpoints.getMentors,
+          method: HttpMethod.post
+      );
+      final List<dynamic> data = response['result'];
+      setState(() {
+        _originalMentorsList = data.map((json) => MentorModel.fromJson(json)).toList();
+        _filteredMentors = data.map((json) => MentorModel.fromJson(json)).toList();
+        _isLoading = false;
+        _hasFetchedData = true;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   void _filterMentors(String value) {
     setState(() {
-      filteredMentors = mentor_data.mentorList
+      _filteredMentors = _originalMentorsList
           .where((mentor) =>
              mentor.name.toLowerCase().contains(value.toLowerCase()))
           .toList();
@@ -55,7 +84,8 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Color(0xff363B53)),
         ),
     ),
-      body: Center(
+      body: _isLoading ? const Center(child: CircularProgressIndicator()) :
+      Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +111,7 @@ class _HomePageState extends State<HomePage> {
               selectedStack != null ? OutlinedButton(
                 onPressed: () {
                   setState(() {
-                    filteredMentors = mentor_data.mentorList;
+                    _filteredMentors = _originalMentorsList;
                     selectedStack = null;
                   });
                 },
@@ -105,10 +135,10 @@ class _HomePageState extends State<HomePage> {
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     itemBuilder: (_, index) {
-                      return MentorTile(mentorInfo: filteredMentors[index]);
+                      return MentorTile(mentorInfo: _filteredMentors[index]);
                     },
                     separatorBuilder: (_, index) => const SizedBox(height: 20),
-                    itemCount: filteredMentors.length,
+                    itemCount: _filteredMentors.length,
                 ),
               ),
             ],

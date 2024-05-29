@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mentorando/components/stack_tile.dart';
-import 'package:mentorando/components/star_rating.dart';
 import 'package:mentorando/models/mentor_model.dart';
 
 class ExpandableTitleTile extends StatelessWidget {

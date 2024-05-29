@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mentorando/components/stack_tile.dart';
-import 'package:mentorando/components/star_rating.dart';
-import 'package:mentorando/models/mentor_model.dart';
 
 class UserProfileSection extends StatelessWidget {
   final List<String> stacks = [
@@ -33,7 +31,7 @@ class UserProfileSection extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Usuário",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
                     color: Color(0xff363B53),

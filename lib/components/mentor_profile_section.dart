@@ -7,12 +7,6 @@ import 'package:mentorando/models/mentor_model.dart';
 class MentorProfileSection extends StatelessWidget {
   final MentorModel mentorInfo;
 
-  final List<String> stacks = [
-    "javascript",
-    "react",
-    "nodeJS"
-  ];
-
   MentorProfileSection({
     super.key,
     required this.mentorInfo
@@ -23,7 +17,7 @@ class MentorProfileSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(
+        SvgPicture.network(
           mentorInfo.imgProfile,
           width: 150,
           height: 150,
@@ -63,7 +57,7 @@ class MentorProfileSection extends StatelessWidget {
                 height: 50,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (_, index)  => StackTile(stackLabel: stacks[index]),
+                  itemBuilder: (_, index)  => StackTile(stackLabel: mentorInfo.stacks[index]),
                   separatorBuilder: (_, index) => const SizedBox(width: 8),
                   itemCount: 3,
                 ),
