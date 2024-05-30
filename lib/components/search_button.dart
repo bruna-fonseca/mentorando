@@ -37,7 +37,7 @@ class _SearchButtonState extends State<SearchButton> {
               onSelectedItemChanged: (int value) {
                   setState(() {
                     _selectedValue = value;
-                    widget.selectStack(value);
+                    widget.selectStack(value, mentor_data.stacks);
                   });
               },
             ),
