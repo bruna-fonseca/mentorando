@@ -33,7 +33,7 @@ class AuthRepository {
     required String password,
     required String name,
     required String phone,
-    required String cpf
+    required String occupation
   }) async {
     final result = await _httpManager.restRequest(
       url: Endpoints.signUp,
@@ -43,8 +43,22 @@ class AuthRepository {
         "password": password,
         "fullname": name,
         "phone": phone,
-        "cpf": cpf,
+        "occupation": occupation,
       },
+    );
+
+    return handleAuthRequest(result);
+  }
+
+  Future<AuthResult> updateUser({ required String aboutme, required List<String> stacks, required String userId }) async {
+    final result = await _httpManager.restRequest(
+        url: Endpoints.updateUserInfo,
+        method: HttpMethod.post,
+      body: {
+        "stacks": stacks,
+        "aboutme": aboutme,
+        "userId": userId
+      }
     );
 
     return handleAuthRequest(result);

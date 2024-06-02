@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mentorando/models/mentor_model.dart';
+import 'package:mentorando/models/sprint_mentor_model.dart';
 
 class ExpandableTitleTile extends StatelessWidget {
-  final MentorModel mentorInfo;
+  final SprintMentorModel mentorInfo;
 
-  final List<String> stacks = [
-    "javascript",
-    "react",
-    "nodeJS"
-  ];
-
-  ExpandableTitleTile({
+  const ExpandableTitleTile({
     super.key,
     required this.mentorInfo
   });
@@ -21,8 +15,8 @@ class ExpandableTitleTile extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(
-          mentorInfo.imgProfile,
+        SvgPicture.network(
+          mentorInfo.image,
           width: 100,
           height: 100,
         ),

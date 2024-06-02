@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mentorando/pages/auth/controller/auth_controller.dart';
 import 'package:mentorando/pages/auth/screen/sign_up_page.dart';
+import 'package:mentorando/pages_routes/app_pages.dart';
 import 'package:mentorando/services/validators.dart';
 import '../../../components/form_clickable_text.dart';
 import '../../../components/form_text_field.dart';
@@ -90,7 +91,7 @@ class LoginPage extends StatelessWidget {
                                               if (_formKey.currentState!.validate()) {
                                                 String email = emailController.text;
                                                 String pass = passwordController.text;
-          
+
                                                 authController.signIn(email: email, password: pass);
                                               } else {
                                                 print('deu ruim na validação');

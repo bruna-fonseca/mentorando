@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mentorando/components/stack_tile.dart';
 
 class UserProfileSection extends StatelessWidget {
-  final List<String> stacks = [
-    "javascript",
-    "react",
-    "nodeJS"
-  ];
+  final String name;
+  final String occupation;
 
-  UserProfileSection({
-    super.key,
+  const UserProfileSection({
+    super.key, required this.name, required this.occupation,
   });
 
   @override
@@ -27,11 +23,11 @@ class UserProfileSection extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Usuário",
-                  style: TextStyle(
+                  name,
+                  style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
                     color: Color(0xff363B53),
@@ -41,20 +37,11 @@ class UserProfileSection extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Dev Jr.",
+                  occupation,
                   style: TextStyle(
                       fontSize: 14,
                       color: Colors.black.withAlpha(100)
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 50,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (_, index)  => StackTile(stackLabel: stacks[index]),
-                  separatorBuilder: (_, index) => const SizedBox(width: 8),
-                  itemCount: 3,
                 ),
               ),
             ],

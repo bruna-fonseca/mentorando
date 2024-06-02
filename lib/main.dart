@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:mentorando/pages_routes/app_pages.dart';
 import 'pages/auth/controller/auth_controller.dart';
@@ -8,7 +9,7 @@ void main() {
 
   Get.put(AuthController());
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

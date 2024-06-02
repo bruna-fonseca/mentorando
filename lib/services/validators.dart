@@ -28,8 +28,7 @@ String? phoneValidator(String? phone) {
   return null;
 }
 
-String? cpfValidator(String? cpf) {
-  if (cpf == null || cpf.isEmpty) return "Digite seu CPF";
-  if (!cpf.isCpf) return "Digite um CPF válido!";
+String? occupationValidator(String? text) {
+  if (text == null || text.isEmpty) return "Digite o seu cargo";
   return null;
 }

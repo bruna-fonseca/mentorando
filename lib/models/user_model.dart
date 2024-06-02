@@ -9,12 +9,18 @@ class UserModel {
   final String? name;
   final String? email;
   final String? token;
+  final String? aboutme;
+  final String? occupation;
+  final List<String>? stacks;
 
   UserModel({
     this.id,
     this.name,
     this.email,
-    this.token
+    this.token,
+    this.aboutme,
+    this.occupation,
+    this.stacks,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);

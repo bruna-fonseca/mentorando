@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mentorando/provider/sprint_tasks_provider.dart';
 import 'package:progresso/progresso.dart';
 
-class CustomProgressBar extends StatelessWidget {
-  const CustomProgressBar({super.key});
+class CustomProgressBar extends ConsumerWidget  {
+  const CustomProgressBar({ super.key });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progress = ref.watch(progressProvider);
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 16.0, bottom: 8.0, top: 20),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, bottom: 8.0, top: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Em Curso",
@@ -24,10 +27,10 @@ class CustomProgressBar extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 30),
+                padding: const EdgeInsets.only(right: 30),
                 child: Text(
-                  "50%",
-                  style: TextStyle(
+                  '${progress.toStringAsFixed(2)}%',
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Color(0xff363B53),
                   ),
@@ -40,7 +43,7 @@ class CustomProgressBar extends StatelessWidget {
           padding: const EdgeInsets.only(left: 22.0, right: 22.0),
           child: Progresso(
             progressColor: const Color(0xff18F313),
-            progress: 0.5,
+            progress: progress / 100,
             progressStrokeCap: StrokeCap.round,
             backgroundStrokeCap: StrokeCap.round,
           ),

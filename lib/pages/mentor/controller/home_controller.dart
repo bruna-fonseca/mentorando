@@ -20,6 +20,7 @@ class HomeController extends GetxController {
 
   void setMentors(List<MentorModel> mentors) {
     allMentors = mentors;
+    filteredAllMentors = allMentors;
     update();
   }
 

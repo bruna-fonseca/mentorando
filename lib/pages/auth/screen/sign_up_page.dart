@@ -10,11 +10,6 @@ import '../../../components/form_text_field.dart';
 class SignUpPage extends StatelessWidget {
   SignUpPage({ super.key });
 
-  final cpfFormatter = MaskTextInputFormatter(
-    mask: '###.###.###-##',
-    filter: {'#': RegExp(r'[0-9]')},
-  );
-
   final phoneFormatter = MaskTextInputFormatter(
     mask: '## # ####-####',
     filter: {'#': RegExp(r'[0-9]')},
@@ -25,7 +20,7 @@ class SignUpPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
-  final cpfController = TextEditingController();
+  final occupationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +95,10 @@ class SignUpPage extends StatelessWidget {
                                     validator: phoneValidator,
                                   ),
                                   FormTextField(
-                                    labelText: "CPF",
-                                    textInputType: TextInputType.number,
-                                    inputFormatters: [cpfFormatter],
-                                    validator: cpfValidator,
-                                    controller: cpfController,
+                                    labelText: "Cargo",
+                                    textInputType: TextInputType.text,
+                                    validator: occupationValidator,
+                                    controller: occupationController,
                                   ),
                                   FormClickableText(
                                       label: "já possui conta? ",
@@ -123,9 +117,9 @@ class SignUpPage extends StatelessWidget {
                                               String pass = passwordController.text;
                                               String name = nameController.text;
                                               String phone = phoneController.text;
-                                              String cpf = cpfController.text;
+                                              String occupation = occupationController.text;
 
-                                              authController.signUp(email, pass, name, phone, cpf);
+                                              authController.signUp(email, pass, name, phone, occupation);
                                             }
                                           },
                                           style: OutlinedButton.styleFrom(
