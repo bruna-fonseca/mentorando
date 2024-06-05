@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mentorando/pages/auth/controller/auth_controller.dart';
 import 'package:mentorando/pages/auth/screen/sign_up_page.dart';
-import 'package:mentorando/pages_routes/app_pages.dart';
 import 'package:mentorando/services/validators.dart';
 import '../../../components/form_clickable_text.dart';
 import '../../../components/form_text_field.dart';
@@ -33,7 +32,7 @@ class LoginPage extends StatelessWidget {
                     const Text(
                       "mentorando.",
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 32,
                         color: Colors.white,
                       ),
                     ),
@@ -42,7 +41,7 @@ class LoginPage extends StatelessWidget {
                       child: Text(
                         "Login",
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 26,
                           color: Colors.white,
                         ),
                       ),
@@ -78,7 +77,7 @@ class LoginPage extends StatelessWidget {
                                     ),
                                     FormClickableText(
                                       label: "não possui conta? ",
-                                      clickableLabel: "faça seu cadastro",
+                                      clickableLabel: "cadastre aqui",
                                       nextPage: MaterialPageRoute(builder: (_) => SignUpPage()),
                                     ),
                                     Padding(

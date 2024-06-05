@@ -24,135 +24,125 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: const Color(0xff363B53),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          width: size.width,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 48),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
             child: Center(
               child: Column(
                 children: [
-                  const Spacer(),
-                  const Text(
-                    "mentorando.",
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white,
-                    ),
-                  ),
                   const Padding(
                     padding: EdgeInsets.only(top: 32.0),
                     child: Text(
-                      "Cadastro",
+                      "mentorando.",
                       style: TextStyle(
                         fontSize: 32,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(10))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  FormTextField(
-                                    textInputType: TextInputType.emailAddress,
-                                      controller: emailController,
-                                      validator: emailvalidator,
-                                      labelText: "e-mail"),
-                                  FormTextField(
-                                      validator: passwordValidator,
-                                      labelText: "senha",
-                                      controller: passwordController,
-                                      isSecret: true,
-                                  ),
-                                  FormTextField(
-                                      labelText: "nome completo",
-                                      validator: nameValidator,
-                                    controller: nameController,
-                                  ),
-                                  FormTextField(
-                                    labelText: "telefone",
-                                    textInputType: TextInputType.number,
-                                    inputFormatters: [phoneFormatter],
-                                    controller: phoneController,
-                                    validator: phoneValidator,
-                                  ),
-                                  FormTextField(
-                                    labelText: "Cargo",
-                                    textInputType: TextInputType.text,
-                                    validator: occupationValidator,
-                                    controller: occupationController,
-                                  ),
-                                  FormClickableText(
-                                      label: "já possui conta? ",
-                                      clickableLabel: "faça seu login",
-                                      nextPage: MaterialPageRoute(
-                                          builder: (_) => LoginPage())),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                    child: GetX<AuthController>(
-                                      builder: (authController) {
-                                        return OutlinedButton(
-                                          onPressed: () {
-                                            FocusScope.of(context).unfocus();
-                                            if (_formKey.currentState!.validate()) {
-                                              String email = emailController.text;
-                                              String pass = passwordController.text;
-                                              String name = nameController.text;
-                                              String phone = phoneController.text;
-                                              String occupation = occupationController.text;
-
-                                              authController.signUp(email, pass, name, phone, occupation);
-                                            }
-                                          },
-                                          style: OutlinedButton.styleFrom(
-                                              fixedSize: const Size(250, 60),
-                                              side: const BorderSide(width: 2, color: Color(0xff363B53))
-                                          ),
-                                          child: authController.isLoading.value ?
-                                          const CircularProgressIndicator() :
-                                          const Text(
-                                            "fazer login",
-                                            style: TextStyle(
-                                              color: Color(0xff363B53),
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                    child: Text(
+                      "Cadastro",
+                      style: TextStyle(
+                        fontSize: 26,
+                        color: Colors.white,
                       ),
                     ),
                   ),
-                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    width: constraints.maxWidth > 600 ? 600 : constraints.maxWidth,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          FormTextField(
+                              textInputType: TextInputType.emailAddress,
+                              controller: emailController,
+                              validator: emailvalidator,
+                              labelText: "e-mail"),
+                          FormTextField(
+                            validator: passwordValidator,
+                            labelText: "senha",
+                            controller: passwordController,
+                            isSecret: true,
+                          ),
+                          FormTextField(
+                            labelText: "nome completo",
+                            validator: nameValidator,
+                            controller: nameController,
+                          ),
+                          FormTextField(
+                            labelText: "telefone",
+                            textInputType: TextInputType.number,
+                            inputFormatters: [phoneFormatter],
+                            controller: phoneController,
+                            validator: phoneValidator,
+                          ),
+                          FormTextField(
+                            labelText: "Cargo",
+                            textInputType: TextInputType.text,
+                            validator: occupationValidator,
+                            controller: occupationController,
+                          ),
+                          FormClickableText(
+                            label: "já possui conta? ",
+                            clickableLabel: "faça seu login",
+                            nextPage: MaterialPageRoute(builder: (_) => LoginPage()),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: GetX<AuthController>(
+                              builder: (authController) {
+                                return OutlinedButton(
+                                  onPressed: () {
+                                    FocusScope.of(context).unfocus();
+                                    if (_formKey.currentState!.validate()) {
+                                      String email = emailController.text;
+                                      String pass = passwordController.text;
+                                      String name = nameController.text;
+                                      String phone = phoneController.text;
+                                      String occupation = occupationController.text;
+
+                                      authController.signUp(email, pass, name, phone, occupation);
+                                    }
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                      fixedSize: const Size(250, 60),
+                                      side: const BorderSide(width: 2, color: Color(0xff363B53))
+                                  ),
+                                  child: authController.isLoading.value ?
+                                  const CircularProgressIndicator() :
+                                  const Text(
+                                    "cadastrar",
+                                    style: TextStyle(
+                                      color: Color(0xff363B53),
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

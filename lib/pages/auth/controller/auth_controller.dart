@@ -28,7 +28,7 @@ class AuthController extends GetxController {
         success: (user) {
           this.user = user;
           update();
-          Get.offAllNamed(Paths.initial);
+          Get.offAllNamed(Paths.onboarding);
         },
         error: (message) {
           utilsServices.showToast(
